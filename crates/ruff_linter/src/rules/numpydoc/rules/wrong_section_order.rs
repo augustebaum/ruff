@@ -95,3 +95,11 @@ impl Violation for WrongSectionOrder {
         )
     }
 }
+
+/// GL07
+pub(crate) fn wrong_section_order(checker: &Checker, docstring: &Docstring) -> bool {
+    if checker.enabled(Rule::WrongSectionOrder) {
+        checker.report_diagnostic(Diagnostic::new(WrongSectionOrder, docstring.range()));
+    }
+    false
+}

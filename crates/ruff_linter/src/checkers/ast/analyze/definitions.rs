@@ -87,6 +87,7 @@ pub(crate) fn definitions(checker: &mut Checker) {
         Rule::DocstringMissingException,
         Rule::DocstringExtraneousException,
     ]);
+    let enforce_numpydoc = checker.any_enabled(&[Rule::WrongSectionOrder]);
 
     if !enforce_annotations
         && !enforce_docstrings
@@ -94,6 +95,7 @@ pub(crate) fn definitions(checker: &mut Checker) {
         && !enforce_stubs_and_runtime
         && !enforce_dunder_method
         && !enforce_pydoclint
+        && !enforce_numpydoc
     {
         return;
     }
@@ -290,7 +292,7 @@ pub(crate) fn definitions(checker: &mut Checker) {
                 Rule::OverindentedSectionUnderline,
                 Rule::UndocumentedParam,
             ]);
-            if enforce_sections || enforce_pydoclint {
+            if enforce_sections || enforce_pydoclint || enforce_numpydoc {
                 let section_contexts = pydocstyle::helpers::get_section_contexts(
                     &docstring,
                     checker.settings.pydocstyle.convention(),
@@ -313,6 +315,10 @@ pub(crate) fn definitions(checker: &mut Checker) {
                         &section_contexts,
                         checker.settings.pydocstyle.convention(),
                     );
+                }
+
+                if enforce_numpydoc {
+                    todo!();
                 }
             }
         }
