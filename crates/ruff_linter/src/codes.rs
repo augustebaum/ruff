@@ -129,6 +129,9 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         #[allow(deprecated)]
         (Pycodestyle, "E999") => (RuleGroup::Removed, rules::pycodestyle::rules::SyntaxError),
 
+        // numpydoc
+        (Numpydoc, "GL07") => (RuleGroup::Stable, rules::numpydoc::rules::WrongSectionOrder),
+
         // pycodestyle warnings
         (Pycodestyle, "W191") => (RuleGroup::Stable, rules::pycodestyle::rules::TabIndentation),
         (Pycodestyle, "W291") => (RuleGroup::Stable, rules::pycodestyle::rules::TrailingWhitespace),
