@@ -171,6 +171,9 @@ pub enum Linter {
     /// NumPy-specific rules
     #[prefix = "NPY"]
     Numpy,
+    /// [numpydoc](https://pypi.org/project/numpydoc/)
+    #[prefix = "NPD"]
+    Numpydoc,
     /// [pandas-vet](https://pypi.org/project/pandas-vet/)
     #[prefix = "PD"]
     PandasVet,
